@@ -29,7 +29,7 @@ const Home = () => {
                 </div>
             </div>
             <div className='container'>
-                <h3>Travel_Mate</h3>
+                <h3 className='text-center my-2'>Travel_Mate</h3>
                 <p>
                     TravelMate is a website which provides you the one stop solution for all the problems of travelers whether it is regular Upadtes, Complete details of that place or how to reach That place with a cost effective way.
                     Travel mate also solve the language barrier problem as you can hire a guide on your journey According to the reviews of the other travellors (all the guides are truely certified and can be trustable ). 
