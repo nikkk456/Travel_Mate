@@ -1,15 +1,37 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import bg from "./Image/bg.jpg"
 import Typewriter from "typewriter-effect";
+import {  useState } from 'react';
+import { useNavigate } from "react-router-dom";
+import { Context } from './context';
+import {
+    BrowserRouter as Router,
+    Link,
+  } from "react-router-dom";
 const Home = () => {
+    const navigate = useNavigate();
+    const[context, setcontext] = useContext(Context);
+    const[Text, setText] = useState("");
+    const HandleChange = (event)=>{
+        setText(event.target.value);
+        // console.log(Text);
+    }
+    const result = ()=>{
+        setcontext(Text);
+        navigate("/result");
+    }
+    
+    
+    
     return (
         <>
+            
             <div style={{ backgroundImage: `url(${bg})`, width: "100%", backgroundSize: 'cover', height: '100vh', zIndex: "-1" }}>
                 <div className='container'>
                     <div className="App">
                         <Typewriter
 
-                            onInit={(typewriter) => {
+                onInit={(typewriter) => {
 
                                 typewriter
                                     .typeString("Travel_Mate welcomes you")
@@ -17,14 +39,14 @@ const Home = () => {
                                     .deleteAll()
                                     .typeString("One stop services")
                                     .start();
-                            }}
-                        />
+                                }}
+                                />
                     </div>
                     <center>
                     <form role="search">
-                        <input className="form-control me-1" style={{ width: "30%", borderRadius: "1.3rem" }} type="search" placeholder="Enter your destination" aria-label="Search" />
+                        <input className="form-control me-1" style={{ width: "30%", borderRadius: "1.3rem" }} type="search" placeholder="Enter your destination" aria-label="Search" onChange={HandleChange} />
                         </form>
-                    <button className="btn btn-outline-dark my-2" type="submit">Search</button>
+                    <Link to='/result'><button className="btn btn-outline-dark my-2" type="submit" onClick={result}>Search</button></Link>
                     </center>
                 </div>
             </div>
@@ -37,6 +59,7 @@ const Home = () => {
                     and the last but not least you Can intreact with your travel mates with our app, you can chat with them and can enjoy your journey more joyfully.
                 </p>
             </div>
+            
         </>
     )
 }
