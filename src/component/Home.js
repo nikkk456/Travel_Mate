@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import bg from "./Image/bg.jpg"
 import Typewriter from "typewriter-effect";
+import Footer from "./Footer"
 import {  useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Context } from './context';
@@ -51,15 +52,15 @@ const Home = () => {
                 </div>
             </div>
             <div className='container'>
-                <h3 className='text-center my-2'>Travel_Mate</h3>
-                <p>
+                <h3 className='text-center my-2 '><span className='my-2' style={{borderBottom: "2px solid yellow"}}>Travel_Mate</span></h3>
+                <p style={{border: "1px solid black", borderRadius: "30px", padding: "25px"}}>
                     TravelMate is a website which provides you the one stop solution for all the problems of travelers whether it is regular Upadtes, Complete details of that place or how to reach That place with a cost effective way.
                     Travel mate also solve the language barrier problem as you can hire a guide on your journey According to the reviews of the other travellors (all the guides are truely certified and can be trustable ). 
                     Not only this you can search a travel blog related to your destination and find all the related thrill and experience by your travell mates.
                     and the last but not least you Can intreact with your travel mates with our app, you can chat with them and can enjoy your journey more joyfully.
                 </p>
             </div>
-            
+            <Footer/>
         </>
     )
 }
