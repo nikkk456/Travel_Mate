@@ -1,8 +1,10 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import bg from "./Image/bg.jpg"
 import Typewriter from "typewriter-effect";
 import Footer from "./Footer"
+import Navbar from './Navbar';
 import {  useState } from 'react';
+import { auth } from '../Firebase';
 import { useNavigate } from "react-router-dom";
 import { Context } from './context';
 import {
@@ -10,6 +12,16 @@ import {
     Link,
   } from "react-router-dom";
 const Home = () => {
+    const[userName, setUserName] = useState("");
+    useEffect(()=>{
+        auth.onAuthStateChanged((user)=>{
+            if (user) {
+                setUserName(user.displayName);
+            } else {
+                setUserName("");
+            }
+        })
+    },[])
     const navigate = useNavigate();
     const[context, setcontext] = useContext(Context);
     const[Text, setText] = useState("");
@@ -26,7 +38,7 @@ const Home = () => {
     
     return (
         <>
-            
+            <Navbar userName = {userName}/>
             <div style={{ backgroundImage: `url(${bg})`, width: "100%", backgroundSize: 'cover', height: '100vh', zIndex: "-1" }}>
                 <div className='container'>
                     <div className="App">

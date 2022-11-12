@@ -15,25 +15,17 @@ import Signup from './component/Signup';
 import { auth } from './Firebase';
 import Login from './component/Login';
 import Signout from './Signout';
+import GetGuide from './component/GetGuide';
 
 
 function App() {
     const [context, setcontext] = useState("default context value");
-    const[userName, setUserName] = useState("");
-    useEffect(()=>{
-        auth.onAuthStateChanged((user)=>{
-            if (user) {
-                setUserName(user.displayName);
-            } else {
-                setUserName("");
-            }
-        })
-    },[])
+    
 
     return (
         <div >
             
-                <Navbar userName = {userName}/>
+                
                 <Context.Provider value={[context,setcontext]}>
                 <Routes>
                     <Route path='/' element={<Signup/>}/>
@@ -43,6 +35,7 @@ function App() {
                     <Route path='/Blog' element={<Socialmedia />} />
                     <Route path='/Login' element={<Login />} />
                     <Route path='/Signout' element={<Signout />} />
+                    <Route path='/GetGuide' element={<GetGuide />} />
                 </Routes>
                 </Context.Provider>
             

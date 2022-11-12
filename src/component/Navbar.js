@@ -20,13 +20,13 @@ const Navbar = (props) => {
                                 <a className={`nav-link disabled`} aria-current="page" href="/">MeetUp<span className="badge bg-secondary">New</span></a>
                             </li>
                             <li className="nav-item">
-                                <a className={`nav-link ${location.pathname === "/Blog"?"active": ""} ${props.userName === null?"disabled":""}`} aria-current="page" href="/Blog">Travel Blog</a>
+                                <a className={`nav-link ${location.pathname === "/Blog"?"active": ""}`} aria-current="page" href="/Blog">Travel Blog</a>
                             </li>
                             <li className="nav-item">
-                                <a className={`nav-link ${location.pathname === "/Guide"?"active": ""}${props.userName === null?"disabled":""}`} href="/Guide">Become a Guide</a>
+                                <a className={`nav-link ${location.pathname === "/Guide"?"active": ""}`} href="/Guide">Become a Guide</a>
                             </li>
                             <li className="nav-item">
-                                <a className={`nav-link ${location.pathname === "/About"?"active": ""}${props.userName === null?"disabled":""}`} aria-current="page" href="/">About Us</a>
+                                <a className={`nav-link ${location.pathname === "/About"?"active": ""}`} aria-current="page" href="/Home">About Us</a>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" aria-current="page" href="/Signout">{props.userName}</a>
