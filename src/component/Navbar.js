@@ -25,9 +25,7 @@ const Navbar = (props) => {
                             <li className="nav-item">
                                 <a className={`nav-link ${location.pathname === "/Guide"?"active": ""}`} href="/Guide">Become a Guide</a>
                             </li>
-                            <li className="nav-item">
-                                <a className={`nav-link ${location.pathname === "/About"?"active": ""}`} aria-current="page" href="/Home">About Us</a>
-                            </li>
+                            
                             <li className="nav-item">
                                 <a className="nav-link" aria-current="page" href="/Signout">{props.userName}</a>
                             </li>
