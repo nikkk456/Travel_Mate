@@ -72,7 +72,7 @@ const Result = () => {
     }
   };
   const fetchWeather = async () => {
-    const url2 = `http://api.weatherapi.com/v1/forecast.json?key=acc5a29a357e4169ac265929221112&q=${context}&days=5&aqi=no&alerts=no`
+    const url2 = `https://api.weatherapi.com/v1/forecast.json?key=acc5a29a357e4169ac265929221112&q=${context}&days=5&aqi=no&alerts=no`
     try {
       const response = await fetch(url2, options2);
       const nikk2 = await response.json();
