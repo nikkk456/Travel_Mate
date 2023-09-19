@@ -77,6 +77,7 @@ const Result = () => {
       const response = await fetch(url2, options2);
       const nikk2 = await response.json();
       setJson2(nikk2);
+      console.log("weather api here");
       console.log(nikk2);
       // console.log("the work is done");
       console.log(json2.location.lat + " " + json2.location.lon);

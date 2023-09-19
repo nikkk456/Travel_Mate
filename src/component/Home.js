@@ -42,10 +42,7 @@ const Home = () => {
             <div style={{ backgroundImage: `url(${bg})`, width: "100%", backgroundSize: 'cover', height: '100vh', zIndex: "-1" }}>
                 <div className='container'>
                     <div className="App">
-                        <Typewriter
-
-                onInit={(typewriter) => {
-
+                        <Typewriter onInit={(typewriter) => {
                                 typewriter
                                     .typeString("Travel_Mate welcomes you")
                                     .pauseFor(1000)

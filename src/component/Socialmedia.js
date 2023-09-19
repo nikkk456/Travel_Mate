@@ -10,6 +10,7 @@ import { storage } from '../Firebase'
 import Navbar from './Navbar'
 import { ref as ref_storage, uploadBytes, listAll, getDownloadURL } from 'firebase/storage';
 
+
 const Socialmedia = () => {
     const [arr, setArr] = useState([]);
     const [uploaded, setUploaded] = useState(false);
@@ -28,34 +29,69 @@ const Socialmedia = () => {
         title: "",
         description: "",
     })
-    const [imageUpload, setImageUpload] = useState(null);
+    const urls = [];
+    const [imageUpload, setImageUpload] = useState([]);
     const imageListref = ref_storage(storage, `SocialImage/`);
-
-    const handleSubmit = async (e) => {
+    var isuploaded = false;
+    const handleSubmit =  async(e) => {
         e.preventDefault();
         const { title, description } = values;
+         imageUpload.map( async (image) => {
+            const imageRef = ref_storage(storage, `SocialImage/${image.name}`); // /iske baad file name aaega
+             await uploadBytes(imageRef, image).then(async() => {
+                console.log("Image POSTED");
+                // setImageUpload(null);
+               await getDownloadURL(imageRef).then((url) => {
+                    urls.push(url);
+                    console.log(urls);
+                });
 
-        const imageRef = ref_storage(storage, `SocialImage/${imageUpload.name}`); // /iske baad file name aaega
-        uploadBytes(imageRef, imageUpload).then(() => {
-            // console.log("Image POSTED");
-            setImageUpload(null);
-            getDownloadURL(imageRef).then((url) => {
-                set(ref_database(db, 'Blog/' + title), {
-                    title: title,
-                    description: description,
-                    imageUrl: url,
-                }).then(() => {
-                    alert("Successfully Posted");
-                    setValues({
-                        title: "", description: "",
-                    })
-                    setImageUpload(null);
-                    window.location.reload(true);
-                })
-            })
+            });
+            isuploaded = true;
+            console.log(isuploaded);
         })
-
+        setTimeout(() => {
+            set(ref_database(db, 'Blog/' + title), {
+                title: title,
+                description: description,
+                imageUrl: urls,
+            }).then(() => {
+                alert("Successfully Posted");
+                setValues({
+                    title: "", description: "",
+                })
+                setImageUpload(null);
+                // window.location.reload(true);
+            })
+        }, 4000);
+        
     }
+
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     const { title, description } = values;
+
+    //     const imageRef = ref_storage(storage, `SocialImage/${imageUpload.name}`); // /iske baad file name aaega
+    //     uploadBytes(imageRef, imageUpload).then(() => {
+    //         // console.log("Image POSTED");
+    //         setImageUpload(null);
+    //         getDownloadURL(imageRef).then((url) => {
+    //             set(ref_database(db, 'Blog/' + title), {
+    //                 title: title,
+    //                 description: description,
+    //                 imageUrl: url,
+    //             }).then(() => {
+    //                 alert("Successfully Posted");
+    //                 setValues({
+    //                     title: "", description: "",
+    //                 })
+    //                 setImageUpload(null);
+    //                 window.location.reload(true);
+    //             })
+    //         })
+    //     })
+
+    // }
 
     const getBlogs = () => {
         const dbRef = ref_database(db);
@@ -101,7 +137,12 @@ const Socialmedia = () => {
 
                                 <div className="form-group has-error my-2">
                                     <label htmlFor="slug">Attach Image,Videos<span className="require">*</span> </label>
-                                    <input type="file" className="form-control" onChange={(event) => { setImageUpload(event.target.files[0]) }} name="image" />
+                                    <input type="file" className="form-control" multiple onChange={(event) => { for (let index = 0; index < event.target.files.length; index++) {
+                                            const newImage = event.target.files[index];
+                                            newImage["id"] = Math.random();
+                                            setImageUpload((prevState)=>[...prevState, newImage]) ;
+                                        }
+                                        }} name="image" />
                                 </div>
 
 
